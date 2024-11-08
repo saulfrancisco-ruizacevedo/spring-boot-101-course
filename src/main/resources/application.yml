@@ -1,0 +1,8 @@
+spring:
+  application:
+  name: springboot-service-demo
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api/spring-boot-course
