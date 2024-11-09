@@ -7,7 +7,8 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import static com.dartrox.course.springboot.service.demo.enums.CustomErrorMessage.BAD_REQUEST;
+import static com.dartrox.course.springboot.service.demo.constants.CustomErrorMessage.BAD_REQUEST;
+import static com.dartrox.course.springboot.service.demo.constants.FieldConstant.EMAIL;
 
 @Slf4j
 @Service
@@ -31,7 +32,7 @@ public class AgentServiceImpl implements AgentService {
     private void validateAgentOnCreation(Agent agent) {
         log.info("Validating agent");
 
-        throw new BadRequestException(BAD_REQUEST, "email", agent.getEmail()); // For example: We are validating the email and it failed :(
+        throw new BadRequestException(BAD_REQUEST, EMAIL, agent.getEmail()); // For example: We are validating the email and it failed :(
     }
 
     @Override

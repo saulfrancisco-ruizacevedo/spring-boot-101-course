@@ -1,6 +1,5 @@
 package com.dartrox.course.springboot.service.demo.exception.customExceptions;
 
-import com.dartrox.course.springboot.service.demo.enums.CustomErrorMessage;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Getter;
@@ -14,7 +13,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @SuppressWarnings("rawtypes")
 public abstract class CustomAbstractException extends RuntimeException {
 
-    private final CustomErrorMessage customErrorMessage;
+    private final String customErrorMessage;
 
     private final HttpStatus status;
 
@@ -29,16 +28,16 @@ public abstract class CustomAbstractException extends RuntimeException {
         statusMap.put(BAD_REQUEST, BadRequestException.class);
     }
 
-    public CustomAbstractException(CustomErrorMessage customErrorMessage) {
-        super(customErrorMessage.getValue());
+    public CustomAbstractException(String customErrorMessage) {
+        super(customErrorMessage);
         this.customErrorMessage = customErrorMessage;
         this.field = null;
         this.value = null;
         this.status = getHttpStatus();
     }
 
-    public CustomAbstractException(CustomErrorMessage customErrorMessage, String field, String value) {
-        super(customErrorMessage.getValue());
+    public CustomAbstractException(String customErrorMessage, String field, String value) {
+        super(customErrorMessage);
         this.customErrorMessage = customErrorMessage;
         this.field = field;
         this.value = value;

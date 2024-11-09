@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
 
         final CustomErrorResponseDTO customErrorResponseDTO = CustomErrorResponseDTO.builder()
                 .statusCode(ex.getStatus())
-                .errorMessage(ex.getCustomErrorMessage().getValue())
+                .errorMessage(ex.getCustomErrorMessage())
                 .field(ex.getField())
                 .value(ex.getValue())
                 .path(request.getRequestURI())

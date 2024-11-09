@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static com.dartrox.course.springboot.service.demo.constants.UriConstants.AGENT_CREATE;
-import static com.dartrox.course.springboot.service.demo.constants.UriConstants.AGENT_GET_ALL;
+import static com.dartrox.course.springboot.service.demo.constants.UriConstant.AGENT_CREATE;
+import static com.dartrox.course.springboot.service.demo.constants.UriConstant.AGENT_GET_ALL;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
