@@ -10,4 +10,6 @@ public class CustomErrorMessage {
     public static final String BLANK_EMAIL = "Email must not be blank";
     public static final String MIN_AGE = "Agent must be 18+ years";
     public static final String NULL_AGE = "Age must not be null";
+    public static final String AGENT_ID_NOT_FOUND = "Agent id not found";
+    public static final String PROPERTY_ID_NOT_FOUND = "Property id not found";
 }

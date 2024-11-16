@@ -2,7 +2,29 @@ spring:
   application:
   name: springboot-service-demo
 
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true # enables logs fot SQL queries in console
+    properties:
+      hibernate:
+        format_sql: true # legible queries format
+        use_sql_comments: true # adds comments for queries to get more clarity
+
+  h2:
+    path: /h2-console
+    console:
+      enabled: true
+
 server:
   port: 8080
   servlet:
     context-path: /api/spring-boot-course
+
+

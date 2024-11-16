@@ -16,4 +16,6 @@ public interface AgentService {
     Agent create(Agent agent);
 
     List<Agent> getAll();
+
+    Agent assignProperty(Long agentId, Long propertyId);
 }
