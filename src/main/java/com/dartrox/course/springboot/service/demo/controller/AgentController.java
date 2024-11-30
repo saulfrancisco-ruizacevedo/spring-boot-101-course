@@ -1,13 +1,18 @@
 package com.dartrox.course.springboot.service.demo.controller;
 
 import com.dartrox.course.springboot.service.demo.domain.Agent;
+import com.dartrox.course.springboot.service.demo.domain.Property;
 import com.dartrox.course.springboot.service.demo.dto.request.AgentCreateRequestDTO;
+import com.dartrox.course.springboot.service.demo.dto.request.PropertyCreateRequestDTO;
 import com.dartrox.course.springboot.service.demo.dto.response.AgentAssignPropertyResponseDTO;
 import com.dartrox.course.springboot.service.demo.dto.response.AgentCreateResponseDTO;
 import com.dartrox.course.springboot.service.demo.dto.response.AgentAllResponseDTO;
 import com.dartrox.course.springboot.service.demo.mapper.AgentMapper;
+import com.dartrox.course.springboot.service.demo.mapper.PropertyMapper;
 import com.dartrox.course.springboot.service.demo.service.AgentService;
 import jakarta.validation.Valid;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +46,8 @@ public class AgentController {
         agent = agentService.create(agent);
 
         final AgentCreateResponseDTO agentCreateResponseDTO = AgentMapper.INSTANCE.toAgentCreateResponseDTO(agent);
+
+        log.info("agentCreateResponseDTO: {}", agentCreateResponseDTO);
         return ResponseEntity.status(CREATED).body(agentCreateResponseDTO);
     }
 
@@ -54,9 +61,11 @@ public class AgentController {
     }
 
     @PatchMapping(value = AGENT_ASSIGN_PROPERTY, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<AgentAssignPropertyResponseDTO> assignProperty (@PathVariable(value = "agentId") long agentId,
-                                                                          @PathVariable(value = "propertyId") long propertyId) {
-        final Agent agent = agentService.assignProperty(agentId, propertyId);
+    public ResponseEntity<AgentAssignPropertyResponseDTO> assignProperty(@PathVariable(value = "agentId") String agentId,
+                                                                          @RequestBody PropertyCreateRequestDTO propertyCreateRequestDTO) {
+        final Property property = PropertyMapper.INSTANCE.toProperty(propertyCreateRequestDTO);
+
+        final Agent agent = agentService.assignProperty(agentId, property);
 
         final AgentAssignPropertyResponseDTO agentAssignPropertyResponseDTO = AgentMapper.INSTANCE.toAgentAssignPropertyResponseDTO(agent);
         log.info("Response body: {}", agentAssignPropertyResponseDTO);

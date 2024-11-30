@@ -1,5 +1,5 @@
 package com.dartrox.course.springboot.service.demo.dto.response;
 
-public record AgentCreateResponseDTO(Long id,
+public record AgentCreateResponseDTO(String id,
                                      String name) {
 }

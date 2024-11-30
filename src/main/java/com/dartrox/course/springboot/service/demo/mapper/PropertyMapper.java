@@ -1,6 +1,7 @@
 package com.dartrox.course.springboot.service.demo.mapper;
 
 import com.dartrox.course.springboot.service.demo.domain.Property;
+import com.dartrox.course.springboot.service.demo.dto.request.PropertyCreateRequestDTO;
 import com.dartrox.course.springboot.service.demo.entity.PropertyEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -13,4 +14,6 @@ public interface PropertyMapper {
     Property toProperty(PropertyEntity propertyEntity);
 
     PropertyEntity toPropertyEntity(Property property);
+
+    Property toProperty(PropertyCreateRequestDTO propertyCreateRequestDTO);
 }

@@ -1,6 +1,7 @@
 package com.dartrox.course.springboot.service.demo.service;
 
 import com.dartrox.course.springboot.service.demo.domain.Agent;
+import com.dartrox.course.springboot.service.demo.domain.Property;
 import com.dartrox.course.springboot.service.demo.exception.customExceptions.BadRequestException;
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface AgentService {
 
     List<Agent> getAll();
 
-    Agent assignProperty(Long agentId, Long propertyId);
+    Agent assignProperty(String agentId, Property property);
 }

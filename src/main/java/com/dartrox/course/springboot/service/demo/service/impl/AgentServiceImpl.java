@@ -7,7 +7,6 @@ import com.dartrox.course.springboot.service.demo.exception.customExceptions.Res
 import com.dartrox.course.springboot.service.demo.mapper.AgentMapper;
 import com.dartrox.course.springboot.service.demo.repository.AgentRepository;
 import com.dartrox.course.springboot.service.demo.service.AgentService;
-import com.dartrox.course.springboot.service.demo.service.PropertyService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +21,6 @@ import static com.dartrox.course.springboot.service.demo.constants.CustomErrorMe
 public class AgentServiceImpl implements AgentService {
 
     private final AgentRepository agentRepository;
-
-    private final PropertyService propertyService;
 
     /**
      * {@inheritDoc}
@@ -42,22 +39,14 @@ public class AgentServiceImpl implements AgentService {
     }
 
     @Override
-    public Agent assignProperty(Long agentId, Long propertyId) {
+    public Agent assignProperty(String agentId, Property property) {
         final Agent agent = findById(agentId);
-        final Property property = propertyService.findById(propertyId);
-
-        boolean propertyExists = agent.getProperties().stream()
-                .anyMatch(prop -> prop.getId().equals(propertyId));
-
-        if (propertyExists) {
-            return agent;
-        }
-
         agent.getProperties().add(property);
+
         return save(agent);
     }
 
-    private Agent findById(Long agentId) {
+    private Agent findById(String agentId) {
         AgentEntity agentEntity = agentRepository.findById(agentId)
                 .orElseThrow(() -> new ResourceNotFoundException(AGENT_ID_NOT_FOUND));
 
