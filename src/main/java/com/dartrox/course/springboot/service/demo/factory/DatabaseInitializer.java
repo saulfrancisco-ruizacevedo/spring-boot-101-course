@@ -20,7 +20,28 @@ public class DatabaseInitializer implements CommandLineRunner {
         log.info("Initializing Database with fake data...");
 
         AgentEntity agent = generateAgent();
+        AgentEntity agent2 = generateAgent();
+        agent2.setName(agent2.getName() + "2");
+        agent2.setEmail("asd");
+
+        AgentEntity agent3 = generateAgent();
+        agent3.setName(agent3.getName() + "3");
+        agent3.setEmail("asdgfd");
+
+        AgentEntity agent4 = generateAgent();
+        agent4.setName(agent4.getName() + "4");
+        agent4.setEmail("ghrt");
+
+        AgentEntity agent5 = generateAgent();
+        agent5.setName(agent5.getName() + "5");
+        agent5.setEmail("gfdg");
+
+
         dataFactoryService.createAgent(agent);
+        dataFactoryService.createAgent(agent2);
+        dataFactoryService.createAgent(agent3);
+        dataFactoryService.createAgent(agent4);
+        dataFactoryService.createAgent(agent5);
         log.info("Agent created: {}", agent.getName());
 
 

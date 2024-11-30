@@ -8,5 +8,6 @@ public class UriConstant {
     public static final String AGENT_CREATE = "/agent/create";
     public static final String AGENT_GET_ALL = "/agent/all";
     public static final String AGENT_ASSIGN_PROPERTY = "/agent/{agentId}/property/{propertyId}";
+    public static final String AGENT_GET_ALL_PAGEABLE = "/agent/all/page";
 
 }

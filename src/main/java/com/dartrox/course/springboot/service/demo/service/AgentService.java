@@ -3,6 +3,8 @@ package com.dartrox.course.springboot.service.demo.service;
 import com.dartrox.course.springboot.service.demo.domain.Agent;
 import com.dartrox.course.springboot.service.demo.exception.customExceptions.BadRequestException;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface AgentService {
 
@@ -18,4 +20,6 @@ public interface AgentService {
     List<Agent> getAll();
 
     Agent assignProperty(Long agentId, Long propertyId);
+
+    Page<Agent> getAllPageable(Pageable pageable);
 }

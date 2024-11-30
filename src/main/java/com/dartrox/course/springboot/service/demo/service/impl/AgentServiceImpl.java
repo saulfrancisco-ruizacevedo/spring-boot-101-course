@@ -12,6 +12,8 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import static com.dartrox.course.springboot.service.demo.constants.CustomErrorMessage.AGENT_ID_NOT_FOUND;
@@ -57,6 +59,13 @@ public class AgentServiceImpl implements AgentService {
         return save(agent);
     }
 
+    @Override
+    public Page<Agent> getAllPageable(Pageable pageable) {
+        final Page<AgentEntity> agentEntityPage = agentRepository.findAll(pageable);
+
+        return AgentMapper.INSTANCE.toAgentPage(agentEntityPage, pageable);
+    }
+
     private Agent findById(Long agentId) {
         AgentEntity agentEntity = agentRepository.findById(agentId)
                 .orElseThrow(() -> new ResourceNotFoundException(AGENT_ID_NOT_FOUND));
@@ -70,4 +79,6 @@ public class AgentServiceImpl implements AgentService {
 
         return AgentMapper.INSTANCE.toAgent(agentEntity);
     }
+
+
 }

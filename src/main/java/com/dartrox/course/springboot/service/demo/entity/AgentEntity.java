@@ -17,8 +17,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
+import lombok.Setter;
 
 @Entity
+@Setter
 @Getter
 @Builder
 @NoArgsConstructor

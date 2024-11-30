@@ -11,6 +11,9 @@ import java.util.stream.Collectors;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 @Mapper
 public interface AgentMapper {
@@ -47,5 +50,17 @@ public interface AgentMapper {
         return agentEntities.stream()
                 .map(this::toAgentNoProperties)
                 .collect(Collectors.toList());
+    }
+
+    default Page<Agent> toAgentPage(Page<AgentEntity> agentEntityPage, Pageable pageable) {
+        final List<Agent> agentList = toAgentList(agentEntityPage.stream().toList());
+
+        return new PageImpl<>(agentList, pageable, agentEntityPage.getTotalPages());
+    }
+
+    default Page<AgentAllResponseDTO> toAgentAllResponseDTOPage(Page<Agent> agentPage, Pageable pageable) {
+        final List<AgentAllResponseDTO> agentList = toListAgentAllResponseDTO(agentPage.stream().toList());
+
+        return new PageImpl<>(agentList, pageable, agentPage.getTotalElements());
     }
 }

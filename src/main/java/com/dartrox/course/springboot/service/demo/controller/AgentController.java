@@ -1,5 +1,6 @@
 package com.dartrox.course.springboot.service.demo.controller;
 
+import static com.dartrox.course.springboot.service.demo.constants.UriConstant.AGENT_GET_ALL_PAGEABLE;
 import com.dartrox.course.springboot.service.demo.domain.Agent;
 import com.dartrox.course.springboot.service.demo.dto.request.AgentCreateRequestDTO;
 import com.dartrox.course.springboot.service.demo.dto.response.AgentAssignPropertyResponseDTO;
@@ -12,6 +13,8 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -61,5 +64,15 @@ public class AgentController {
         final AgentAssignPropertyResponseDTO agentAssignPropertyResponseDTO = AgentMapper.INSTANCE.toAgentAssignPropertyResponseDTO(agent);
         log.info("Response body: {}", agentAssignPropertyResponseDTO);
         return ResponseEntity.ok(agentAssignPropertyResponseDTO);
+    }
+
+    @GetMapping(value = AGENT_GET_ALL_PAGEABLE, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<Page<AgentAllResponseDTO>> getAllPageable(Pageable pageable) {
+        final Page<Agent> agentPage = agentService.getAllPageable(pageable);
+
+        final Page<AgentAllResponseDTO> agentAllResponseDTOS = AgentMapper.INSTANCE.toAgentAllResponseDTOPage(agentPage, pageable);
+
+        return agentAllResponseDTOS.isEmpty() ?
+                ResponseEntity.noContent().build() : ResponseEntity.ok(agentAllResponseDTOS);
     }
 }
